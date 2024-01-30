@@ -10,7 +10,9 @@
     margin-right: 20px;
     min-height: 100%;
     padding: 10px;
-    width: 300px;
+    width: 15%;
+    max-height:100%;
+   
 }
 
 
@@ -34,6 +36,7 @@
 
 .sidebar-header{
     color: rgba(255, 255, 255, 0.974);
+    
    
 }
 
@@ -41,6 +44,88 @@
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 0 2px gray;
-    height: 82vh;
+    height:100vh;
     width: 100%;
+    padding: 15px;
+}
+
+.menu{
+    margin-top: 50px;
+    padding: 0 10px;
+}
+
+
+.menu-item{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+.menu-item a{
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: block;
+    padding: 0 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+.menu-item i{
+    margin-right: 10px;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    
+    
+}
+
+.active-menu-item{
+    color: white;
+    background-color: #013737;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+   
+    
+}
+
+.header-action-icon{
+    color: black !important;
+    font-size: 30px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+/* .collapsed-sidebar{
+    background-color: #005555;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    margin-right: 20px;
+    min-height: 100%;
+    padding: 10px;
+    
+} */
+
+.active-menu-item i {
+    margin-left: 10px; 
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 768px){
+   .menu{
+       padding: 0 5px;
+   }
+}
+
+
+
+  
+
+.logo{
+    color: white;
+    font-weight:bold ;
+
 }
