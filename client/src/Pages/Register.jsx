@@ -1,50 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { showLoading, hideLoading } from "../redux/alertSlice";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.alerts);
-  console.log(loading);
-
-  useEffect(() => {
-    console.log("Inside useEffect - Loading:", loading);
-  }, [loading]);
-
   const onFinish = async (values) => {
     try {
-      dispatch(showLoading());
-
       const response = await axios.post(
-        "http://localhost:4500/api/users/register",
+        "http://localhost:3400/api/user/register",
         values
       );
-      if (response.status === 200) {
-        toast.success("User Created Successfully !");
-
+      if (response.data.success) {
+        toast.success(response.data.message);
+        toast("Redirecting to login page");
         navigate("/login");
-      } else if (response.status === 400) {
-        toast.error("User already exist !");
       } else {
-        toast("User Already Exist !");
+        toast.error(response.data.message);
       }
     } catch (error) {
-      dispatch(hideLoading());
-      console.log("Error");
-      toast.error("Something went wrong  !");
-    } finally {
-      dispatch(hideLoading());
+      console.log(error);
+      toast.error("Something went wrong!");
     }
   };
-
   return (
     <div className="authentication">
-      <div className="register-form card p-2">
+      <div className="authentication-form card p-3">
         <h1 className="card-title">Nice to meet you</h1>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item label="Name" name="name">
@@ -54,19 +36,13 @@ const Register = () => {
             <Input placeholder="Email" />
           </Form.Item>
           <Form.Item label="Password" name="password">
-            <Input placeholder="Password" type="password" />
+            <Input placeholder="Password" />
           </Form.Item>
-
-          <Button
-            className="primary-button my-3"
-            htmlType="submit"
-            disabled={loading}
-          >
-            {loading ? "Register" : "Register"}
+          <Button className="primary-button my-3" htmlType="submit">
+            Register
           </Button>
-
-          <Link to="/login" className="anchor">
-            Click here to login
+          <Link to="/login" className="anchor ">
+            Click here to Login
           </Link>
         </Form>
       </div>

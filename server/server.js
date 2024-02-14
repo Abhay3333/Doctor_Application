@@ -1,19 +1,17 @@
-const express = require('express')
-require('dotenv').config()
-const cors = require('cors')
-require('./config/db')
-const userRoute = require('./Routes/userRoute')
-const app = express()
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+require('./Config/db.js');
+const userRoute = require('./Routes/user.route.js')
+dotenv.config();
 
-app.use(express.json())
-app.use(cors())
+const app = express();
+const port = process.env.PORT || 3400;
 
-const port = process.env.PORT
+app.use(express.json());
+app.use(cors());
+app.use('/api/user', userRoute);
 
-
-app.use('/api/users',userRoute)
-
-
-app.listen(port,()=>{
-    console.log(`Server running on ${port}`);
-})
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}` );
+    });
