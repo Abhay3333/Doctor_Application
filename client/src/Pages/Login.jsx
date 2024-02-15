@@ -1,10 +1,29 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3400/api/user/login",
+        values
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        toast("Redirecting to Home page");
+        localStorage.setItem("token", response.data.data);
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    }
   };
   return (
     <div className="authentication">
