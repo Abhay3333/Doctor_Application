@@ -47,6 +47,9 @@ label{
     text-decoration: underline !important;
     font-size: 16px !important;
 }
+
+
+
 .anchor:hover{
     text-decoration: underline !important;
     color: rgb(77, 77, 245) !important;
