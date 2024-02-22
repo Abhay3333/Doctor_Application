@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import axios from "axios";
 import { setUser } from "../redux/userSlice.js";
-import { hideLoading, showLoading } from "../redux/alertsSlice.js";
+import { showLoading, hideLoading } from "../redux/alertsSlice.js";
+import axios from "axios";
+
 const ProtectedRoute = (props) => {
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate = useNavigate;
   const getUser = async () => {
     try {
       dispatch(showLoading());
@@ -22,16 +22,21 @@ const ProtectedRoute = (props) => {
         }
       );
       dispatch(hideLoading());
+      console.log(response);
       if (response.data.success) {
-        dispatch(setUser(response.data.user));
+        dispatch(setUser(response.data.data));
       } else {
+        localStorage.clear();
         navigate("/login");
       }
     } catch (error) {
+      localStorage.clear();
       dispatch(hideLoading());
+      console.log(error);
       navigate("/login");
     }
   };
+
   useEffect(() => {
     if (!user) {
       getUser();
