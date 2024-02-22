@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/alertsSlice.js";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -38,10 +39,10 @@ const Register = () => {
             <Input placeholder="Name" />
           </Form.Item>
           <Form.Item label="Email" name="email">
-            <Input placeholder="Email" />
+            <Input placeholder="Email" type="email" />
           </Form.Item>
           <Form.Item label="Password" name="password">
-            <Input placeholder="Password" />
+            <Input placeholder="Password" type="password" />
           </Form.Item>
           <Button className="primary-button my-3" htmlType="submit">
             Register
