@@ -1,5 +1,6 @@
 const User = require('../Models/user.model.js');
 const bcrypt = require('bcryptjs');
+const Doctor = require('../Models/doctor.model.js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -70,4 +71,28 @@ const getUserId = async (req, res) => {
     }
 };
 
-module.exports = { register, login,getUserId };
+const applyDoctor = async (req, res) => {
+    try {
+        const newDoctor = new Doctor({...req.body,status:"pending",speacialization: req.body.speacialization || "Default Specialization" });
+        await newDoctor.save();
+        const adminUser = await User.findOne({isAdmin:true})
+
+        const unseenNotification = adminUser.unseenNotification
+        unseenNotification.push({
+            type:"new-doctor-request",
+            message:`${newDoctor.firstName} ${newDoctor.lastName} has applied for doctor account`,
+            data:{
+                doctorId:newDoctor._id,
+                name:newDoctor.firstName +" "+ newDoctor.lastName
+            },
+            onClickPath:"/admin/doctors"
+        })
+        await User.findByIdAndUpdate(adminUser._id,{unseenNotification})
+        res.status(200).send({ message: 'Doctor account applied successfully', success: true });
+            } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: 'Error applying Doctor account', success: false });
+    }
+};
+
+module.exports = { register, login,getUserId,applyDoctor};

@@ -22,12 +22,12 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    seenNotofication:{
+    seenNotification:{
         type: Array,
         default: []
     
     },
-    unseenNotofication:{
+    unseenNotification:{
         type: Array,
         default: []
     

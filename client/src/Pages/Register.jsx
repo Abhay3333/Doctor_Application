@@ -39,10 +39,10 @@ const Register = () => {
             <Input placeholder="Name" />
           </Form.Item>
           <Form.Item label="Email" name="email">
-            <Input placeholder="Email" type="email" />
+            <Input placeholder="Email" type="email" required />
           </Form.Item>
           <Form.Item label="Password" name="password">
-            <Input placeholder="Password" type="password" />
+            <Input placeholder="Password" type="password" required />
           </Form.Item>
           <Button className="primary-button my-3" htmlType="submit">
             Register

@@ -39,11 +39,19 @@
    align-items: center;
    justify-content: space-between;
 }
+
+.ant-badge-count{
+    padding-right: 2px !important;
+    padding-bottom: -10px !important;
+}
+
+
+
 .body{
     background-color: white;
     border-radius: 5px;
     box-shadow:0 0 2px gray;
-    height: auto !important; ;
+    height: 108vh !important; ;
     width: 100%;
     padding: 10px;
     margin-bottom: 1.5rem;
@@ -85,6 +93,9 @@
 @media screen and (max-width: 768px) {
     .menu{
         padding: 0 5px;
+    }
+    .body{
+        height: 240vh !important;
     }
     
     
